@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] float speed = 1;
+    [SerializeField] float speed;
     private int direction = 1;
     private Vector3 dirVec;
 

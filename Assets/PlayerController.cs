@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     bool canJump = true; // Control jump cooldown
     bool isGrounded = false; // track if grounded
     string lastDirection = "right";
+    int jumpCount = 0;
+    int maxJumps = 2;
+
 
     [SerializeField] float moveSpeed = 5f; // Adjust as needed
     [SerializeField] float jumpForce = 10f; // Adjust as needed
@@ -21,10 +24,11 @@ public class PlayerController : MonoBehaviour
             transform.Translate(movement * moveSpeed * Time.deltaTime);
 
         // Check for jump input
-        if (canJump && isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (canJump && jumpCount < maxJumps && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
             canJump = false; // Disable jumping temporarily
+            jumpCount++;
             Invoke(nameof(ResetJump), jumpCooldown); // Reset jump after cooldown
         }
 
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            jumpCount = 0;
         }
         
         if (collision.gameObject.CompareTag("Enemy"))
@@ -84,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+
         }
 
         
