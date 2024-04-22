@@ -4,7 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float speed;
     private int direction = 1;
-    private Vector3 dirVec;
+    private Vector3 enemyScale;
 
     
 
@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
         //Movement
         Vector2 movementX = new Vector2(speed * direction, 0);
         transform.Translate(movementX * Time.deltaTime);
-        dirVec = transform.localScale;
+        enemyScale = transform.localScale;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,8 +27,8 @@ public class EnemyController : MonoBehaviour
         {       
             //Turns around
             direction *= -1;
-            dirVec.x *= -1;
-            transform.localScale = dirVec;
+            enemyScale.x *= -1;
+            transform.localScale = enemyScale;
         }
 
         if (other.gameObject.tag == "MinotaurATK")

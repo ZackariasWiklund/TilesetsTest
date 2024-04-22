@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     int maxJumps = 2;
 
 
-    [SerializeField] float moveSpeed = 5f; // Adjust as needed
-    [SerializeField] float jumpForce = 10f; // Adjust as needed
+    [SerializeField] float moveSpeed = 5f; 
+    [SerializeField] float jumpForce = 10f;
     [SerializeField] float jumpCooldown = 0.5f; // Cooldown duration between jumps
 
     void Update()
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         if (canJump && jumpCount < maxJumps && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
-            canJump = false; // Disable jumping temporarily
+            canJump = false; // Disable jumping 
             jumpCount++;
             Invoke(nameof(ResetJump), jumpCooldown); // Reset jump after cooldown
         }
@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        // Can move in the air 
+        
+        
         if (movement.x < 0)
         {
             GetComponent<Animator>().Play("walkleft");
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         movement = value.Get<Vector2>();
     }
 
-    // Detect if the player collides with the ground
+    // Detect if player touches the ground
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Detect if the player leaves the ground
+    // Detect if player leaves the ground
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -95,8 +96,8 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // Reset jump flag after cooldown
-    void ResetJump()
+    // Reset jump after cooldown 
+     void ResetJump()
     {
         canJump = true;
     }

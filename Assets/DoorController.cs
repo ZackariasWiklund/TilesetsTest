@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
-
+    
     private void Start()
     {
 
@@ -23,19 +23,17 @@ public class DoorController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GetComponent<Animator>().Play("Door"); // Trigger the attack animation¨
-            PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                playerController.enabled = false; // Disable the player movement script
-            }
+            GetComponent<Animator>().Play("Door"); // Trigger the animation
+            
+            other.gameObject.GetComponent<PlayerController>().enabled = false;
+
             other.gameObject.GetComponent<Renderer>().enabled = false;
         }
     }
 
     private void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName); 
     }
 
 
